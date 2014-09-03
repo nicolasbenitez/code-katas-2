@@ -5,7 +5,11 @@
    retornar una funcion equivalente de n argumentos"
   [f]
   ;(reduce + [10 5 3 2])
-  (fn [& param](reduce f param))
+  ;(fn [& param] (reduce f param))
+  (fn [& args]
+  (let [res (f (first args))]
+    (if (fn? res)
+    (recur (rest args)))))
   )
 
 
@@ -13,8 +17,11 @@
   "Dado un numero cualquiera de secuencias, cada una ya ordenada de menor a mayor, encontrar el numero
    mas chico que aparezca en todas las secuencias, las secuencias pueden ser infinitas."
   [& seqs]
-
-  )
+  (if (every? true? (map #(=(first %) (reduce min (map first seqs))) seqs))
+   (reduce min(map first seqs))
+    (recur (map #(if (= (first %) (reduce min (map first seqs))) (drop 1 %) %) seqs))
+    )
+)
 
 
 (defn intercalar
@@ -32,4 +39,5 @@
    La funcion debe aceptar una secuencia inicial de numeros, y devolver una secuencia infinita de compresiones, donde
    cada nuevo elemento es el elemento anterior comprimido."
   [secuencia]
+  
   )
