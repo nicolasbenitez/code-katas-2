@@ -30,21 +30,21 @@
                       (iterate inc 20)))))
 
 
-;(deftest intercalar
-;  (is (= '(2 :menor 6 :menor 9 4 3) (k/intercalar < :menor [2 6 9 4 3])))
-;  (is (= '(8) (k/intercalar > :mayor [8])))
-;  (is (empty? (k/intercalar > :mayor ())))
-;  (is (= [0 1 :igual 1 2 3 :igual 5 8 13 :igual 21]
-;         (take 12 (->> [0 1]
-;                       (iterate (fn [[a b]] [b (+ a b)]))
-;                       (map first)
-;                       (k/intercalar (fn [a b]
-;                                        (= (mod a 2) (mod b 2)))
-;                                      :igual))))))
-;
-;
-;(deftest tartamudeo
-;  (is (= [[1 1] [2 1] [1 2 1 1]] (take 3 (k/tartamudeo [1]))))
-;  (is (= [3 1 2 4] (first (k/tartamudeo [1 1 1 4 4]))))
-;  (is (= [1 1 1 3 2 1 3 2 1 1] (nth (k/tartamudeo [1]) 6)))
-;  (is (= 338 (count (nth (k/tartamudeo [3 2]) 15)))))
+(deftest intercalar
+  (is (= '(2 :menor 6 :menor 9 4 3) (k/intercalar < :menor [2 6 9 4 3])))
+  (is (= '(8) (k/intercalar > :mayor [8])))
+  (is (empty? (k/intercalar > :mayor ())))
+  (is (= [0 1 :igual 1 2 3 :igual 5 8 13 :igual 21]
+         (take 12 (->> [0 1]
+                       (iterate (fn [[a b]] [b (+ a b)]))
+                       (map first)
+                       (k/intercalar (fn [a b]
+                                        (= (mod a 2) (mod b 2)))
+                                      :igual))))))
+
+
+(deftest tartamudeo
+  (is (= [[1 1] [2 1] [1 2 1 1]] (take 3 (k/tartamudeo [1]))))
+  (is (= [3 1 2 4] (first (k/tartamudeo [1 1 1 4 4]))))
+  (is (= [1 1 1 3 2 1 3 2 1 1] (nth (k/tartamudeo [1]) 6)))
+  (is (= 338 (count (nth (k/tartamudeo [3 2]) 15)))))

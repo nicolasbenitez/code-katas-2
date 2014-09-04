@@ -6,10 +6,13 @@
   [f]
   ;(reduce + [10 5 3 2])
   ;(fn [& param] (reduce f param))
+
   (fn [& args]
   (let [res (f (first args))]
     (if (fn? res)
-    (recur (rest args)))))
+    (recur ((first args)(rest args)))
+    res
+    )))
   )
 
 
@@ -29,6 +32,14 @@
    retorne una nueva coleccion donde el valor es insertado intercalado cada dos argumentos
    que cumplan el predicado"
   [predicado valor secuencia]
+  (if (not-empty secuencia)
+    (if 
+      (and (not (nil? (second secuencia))) (predicado (first secuencia) (second secuencia)) )
+      (lazy-seq (cons (first secuencia) (cons valor (intercalar predicado valor (rest secuencia)))))
+      (lazy-seq (cons (first secuencia) (intercalar predicado valor (rest secuencia))))
+     )
+     '()
+   )
   )
 
 
