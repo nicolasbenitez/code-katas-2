@@ -3,17 +3,16 @@
 (defn unpartial
   "Escribir una funcion que acepte una funcion parcial con cantidad de argumentos desconocida,
    retornar una funcion equivalente de n argumentos"
-  [f]
-  ;(reduce + [10 5 3 2])
-  ;(fn [& param] (reduce f param))
-
-  (fn [& args]
+  [f] 
+  (partial
+  (fn [f & args]
   (let [res (f (first args))]
     (if (fn? res)
-    (recur ((first args)(rest args)))
-    res
+      (recur res (rest args))
+      res
     )))
-  )
+  f)
+)
 
 
 (defn search
