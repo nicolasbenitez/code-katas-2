@@ -49,5 +49,14 @@
    La funcion debe aceptar una secuencia inicial de numeros, y devolver una secuencia infinita de compresiones, donde
    cada nuevo elemento es el elemento anterior comprimido."
   [secuencia]
-  
+  (defn aux [sec x y temp] 
+    (if (empty? sec)
+        (into temp [x y])
+        (if (= (first sec) y)
+        (recur (rest sec) (inc x) (first sec) temp)
+        (recur (rest sec) 1 (first sec) (into temp [x y])))))
+  (lazy-seq 
+    (cons (aux (rest secuencia) 1 (first secuencia) []) 
+          (tartamudeo (aux (rest secuencia) 1 (first secuencia) []))
+    )
   )
